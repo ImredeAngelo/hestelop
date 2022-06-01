@@ -1,0 +1,28 @@
+version: '3.8'
+services: 
+  nginx:
+    image: nginx:mainline-alpine
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - type: bind
+        source: ./static
+        target: /etc/nginx/data
+      - ./containers/nginx/templates:/etc/nginx/templates
+      - ./containers/nginx/ssl:/etc/letsencrypt/live/localhost
+    depends_on: 
+      - app
+    environment:
+      - NGINX_ENVSUBST_TEMPLATE_SUFFIX=.conf
+      - SERVER=localhost
+      - APP=app:3000
+      - SSL_CERTIFICATE=local.crt     # production: fullchain.pem 
+      - SSL_PRIVATE_KEY=local.key     # production: privkey.pem
+  app:
+    build:
+      context: ./containers/app
+      dockerfile: Dockerfile
+    expose:
+      - 3000
+    
