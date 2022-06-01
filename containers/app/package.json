@@ -1,8 +1,46 @@
 {
   "name": "hestelop",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "server/index.js",
+  "scripts": {
+    "dev": "webpack --config webpack.config.js --mode development --watch",
+    "build": "webpack --config webpack.config.js --mode production",
+    "docker": "nodemon server.js -L",
+    "serve": "node server.js"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.17.10",
+    "@babel/core": "^7.18.2",
+    "@babel/plugin-proposal-class-properties": "^7.17.12",
+    "@babel/preset-env": "^7.18.2",
+    "@babel/preset-react": "^7.17.12",
+    "babel-loader": "^8.2.5",
+    "babel-plugin-root-import": "^6.6.0",
+    "compression-webpack-plugin": "^10.0.0",
+    "css-loader": "^6.7.1",
+    "cssnano": "^5.1.10",
+    "file-loader": "^6.2.0",
+    "node-sass-glob-importer": "^5.3.2",
+    "raw-loader": "^4.0.2",
+    "sass": "^1.52.1",
+    "sass-loader": "^13.0.0",
+    "webpack": "^5.72.1",
+    "webpack-cli": "^4.9.2",
+    "webpack-merge": "^5.8.0",
+    "webpack-node-externals": "^3.0.0",
+    "workbox": "^0.0.0",
+    "workbox-precaching": "^6.5.3",
+    "workbox-routing": "^6.5.3",
+    "workbox-strategies": "^6.5.3",
+    "workbox-webpack-plugin": "^6.5.3",
+    "workbox-window": "^6.5.3"
+  },
   "dependencies": {
-    "express": "^4.18.1"
+    "express": "^4.18.1",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
+    "react-helmet": "^6.1.0",
+    "react-router": "^6.3.0",
+    "react-router-dom": "^6.3.0"
   }
 }
