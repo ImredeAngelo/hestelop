@@ -1,11 +1,10 @@
 FROM node:12-alpine
 ENV NODE_ENV=production
-ENV PORT=3000
-EXPOSE 3000
 WORKDIR /usr/src/app
-COPY ./build .
-COPY package*.json ./
+COPY ./src .
+COPY package.json ./
 RUN yarn install --production
 # RUN npm i --package-lock-only
 # RUN npm ci --only=prod
-CMD ["node", "server.js"]
+EXPOSE 3000
+CMD ["node", "index.js"]

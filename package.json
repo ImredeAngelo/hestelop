@@ -1,0 +1,13 @@
+{
+  "name": "hestelop",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/ImredeAngelo/hestelop.git",
+  "author": "Imre Angelo <imre@angelo.no>",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "containers/app", 
+    "containers/game"
+  ]
+}

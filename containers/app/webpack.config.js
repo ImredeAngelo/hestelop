@@ -22,8 +22,7 @@ const prodConfig = {
 
 // Create config from environment & shared config
 function configure(mode, config) {
-    const devMode = mode == "development";
-    const common = merge(devMode ? devConfig : prodConfig, {
+    const common = merge(mode == "development" ? devConfig : prodConfig, {
         module: {
             rules: [
                 CompileReact(),
