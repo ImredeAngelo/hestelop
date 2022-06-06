@@ -1,7 +1,8 @@
 import React from 'react'
 // import StyleContext from 'isomorphic-style-loader/StyleContext'
 // import { BrowserRouter as Router } from 'react-router-dom'
-import { hydrate } from 'react-dom'
+// import { hydrateRoot } from 'react-dom/client';
+import { createRoot } from 'react-dom/client';
 // import { Workbox } from 'workbox-window'
 
 import App from './app'
@@ -24,11 +25,7 @@ import App from './app'
 // }
 
 // Render app
-hydrate(
-  // <Router>
-    // <StyleContext.Provider value={{ insertCss }}> 
-      <App/>,
-    // </StyleContext.Provider>
-  // </Router>
-  document.getElementById('root')
-)
+const container = document.getElementById('root');
+const root = createRoot(container);
+
+root.render(<App/>);

@@ -6,5 +6,5 @@ COPY package.json ./
 RUN yarn install --production
 # RUN npm i --package-lock-only
 # RUN npm ci --only=prod
-EXPOSE 3000
+EXPOSE 4000
 CMD ["node", "index.js"]

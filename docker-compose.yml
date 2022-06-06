@@ -13,10 +13,12 @@ services:
       - ./containers/nginx/ssl:/etc/letsencrypt/live/localhost
     depends_on: 
       - app
+      - game
     environment:
       - NGINX_ENVSUBST_TEMPLATE_SUFFIX=.conf
       - SERVER=localhost
       - APP=app:3000
+      - SOCKET=game:3001
       - SSL_CERTIFICATE=local.crt     # production: fullchain.pem 
       - SSL_PRIVATE_KEY=local.key     # production: privkey.pem
   app:
@@ -32,8 +34,8 @@ services:
       context: ./containers/game
       dockerfile: Dockerfile
     expose:
-      - 4000
+      - 3001
     environment:
-      - PORT=4000
+      - PORT=3001
 
     

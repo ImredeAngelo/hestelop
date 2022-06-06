@@ -9,5 +9,8 @@
   "workspaces": [
     "containers/app", 
     "containers/game"
-  ]
+  ],
+  "scripts": {
+    "start":"docker compose -f \"docker-compose.yml\" up -d --build && cd containers/app && yarn run dev"
+  }
 }
