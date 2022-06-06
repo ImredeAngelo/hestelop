@@ -33,6 +33,10 @@ services:
     build:
       context: ./containers/game
       dockerfile: Dockerfile
+    volumes:
+      - type: bind
+        source: ./containers/game/src/index.js
+        target: /usr/src/app/index.js
     expose:
       - 3001
     environment:

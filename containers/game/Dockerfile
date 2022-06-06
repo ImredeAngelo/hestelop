@@ -3,8 +3,8 @@ ENV NODE_ENV=production
 WORKDIR /usr/src/app
 COPY ./src .
 COPY package.json ./
-RUN yarn install --production
+RUN yarn install --development
 # RUN npm i --package-lock-only
 # RUN npm ci --only=prod
 EXPOSE 4000
-CMD ["node", "index.js"]
+CMD ["yarn", "start"]

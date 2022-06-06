@@ -1,39 +1,31 @@
 import React, { Component } from 'react'
 import { Helmet } from 'react-helmet'
-import { io } from "socket.io-client";
-
-const ioSettings = { 
-    autoConnect: true,
-    path: '/socket'
-}
+import socket from './assets/socket'
 
 export default class App extends Component {
     constructor() {
         super();
-
-        this.state = {};
         
         this.testSocket = this.testSocket.bind(this);
+        this.testHost = this.testHost.bind(this);
     }
 
     componentDidMount() {
-        const URL = "http://localhost";
-        const socket = io(URL, ioSettings);
-
-        socket.onAny((event, ...args) => {
-            console.log(event, args);
-        });
-
-        this.setState({
-            ...this.state,
-            socket: socket
-        });
+        socket.connect();
     }
     
     testSocket(e) {
-        console.log(this.state);
-        this.state.socket.emit('chat message', 'hello world');
+        this.emit('chat message', document.getElementById('roomID').value);
         e.preventDefault();
+    }
+
+    testHost(e) {
+        this.emit('host', '');
+        e.preventDefault();
+    }
+
+    emit(a, b) {
+        socket.emit(a, b);
     }
 
     render() {
@@ -41,12 +33,15 @@ export default class App extends Component {
             <div>
                 <Helmet>
                     <title>Hesteløp</title>
-                    {/* <script src='/socket.io/socket.io.js'/> */}
+                    <script src="wsclient.js"/>
                 </Helmet>
                 <form>
-                    <input type="text"/>
+                    <input id="roomID" type="text"/>
                     <button onClick={this.testSocket}>
                         Join
+                    </button>
+                    <button onClick={this.testHost}>
+                        Host
                     </button>
                 </form>
             </div>
