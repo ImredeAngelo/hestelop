@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Helmet } from 'react-helmet'
-import socket from './assets/socket'
+import socket, { listen } from './assets/socket'
 
 export default class App extends Component {
     constructor() {
@@ -11,7 +11,20 @@ export default class App extends Component {
     }
 
     componentDidMount() {
-        socket.connect();
+        socket.on('chat message', (msg) => {
+            console.log("msg: ", msg);
+        })
+
+        listen();
+        // socket.connect();
+
+        socket.on('chat message', (msg) => {
+            console.log("b: ", msg);
+        });
+        
+        socket.on('created', (msg) => {
+            console.log(msg);
+        });
     }
     
     testSocket(e) {

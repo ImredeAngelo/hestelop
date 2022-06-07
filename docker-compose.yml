@@ -35,8 +35,8 @@ services:
       dockerfile: Dockerfile
     volumes:
       - type: bind
-        source: ./containers/game/src/index.js
-        target: /usr/src/app/index.js
+        source: ./containers/game/src
+        target: /usr/src/app
     expose:
       - 3001
     environment:

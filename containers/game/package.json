@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "type": "module",
   "devDependencies": {
     "nodemon": "^2.0.16"
   },
@@ -10,6 +11,6 @@
     "socket.io": "^4.5.1"
   },
   "scripts": {
-    "start": "nodemon index.js -L"
+    "start": "nodemon app/index.mjs -L"
   }
 }
