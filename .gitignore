@@ -1,4 +1,6 @@
 build
 dist
 node_modules
-bundle.*
+bundle.js*
+main.css*
+wsclient.js*

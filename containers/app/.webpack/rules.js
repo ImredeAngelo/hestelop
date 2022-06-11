@@ -1,7 +1,7 @@
 const globImporter = require('node-sass-glob-importer');
 
 module.exports.CompileReact = (rootPathPrefix="@", rootPathSuffix="./src/client/assets") => { return {
-    test: /\.(js|jsx)$/i,
+    test: /\.(m?js|jsx)$/i,
     exclude: /(node_modules|bower_components)/,
     use: {
         loader: 'babel-loader',
@@ -27,9 +27,44 @@ module.exports.CompileReact = (rootPathPrefix="@", rootPathSuffix="./src/client/
     }
 }}
 
-module.exports.CompileSass = () => { return {
-    test: /\.s?css$/,
+module.exports.IgnoreSass = () => { return {
+    test: /\.(sa|s?c)ss$/,
     use: [
+        // {
+        //     loader: 'isomorphic-style-loader'
+        // },
+        {
+            loader: 'css-loader',
+            options: {
+                importLoaders: 1,
+                esModule: false,
+                modules: {
+                    localIdentName: '[name]-[local]'
+                }
+            },
+        },
+        // {
+        //     loader: 'postcss-loader'
+        // },
+        {
+            loader: 'sass-loader',
+            options: {
+                sassOptions: {
+                    outputStyle: 'compressed',
+                    implementation: require('sass'),
+                    importer: globImporter(),
+                }
+            }
+        }
+    ]
+}}
+
+module.exports.CompileSass = (extractor) => { return {
+    test: /\.(sa|s?c)ss$/,
+    use: [
+        {
+            loader: extractor
+        },
         // {
         //     loader: 'isomorphic-style-loader'
         // },

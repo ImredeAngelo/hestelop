@@ -11,6 +11,6 @@
     "socket.io": "^4.5.1"
   },
   "scripts": {
-    "start": "nodemon app/index.mjs -L"
+    "start": "nodemon app/index.js -L"
   }
 }

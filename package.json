@@ -11,6 +11,9 @@
     "containers/game"
   ],
   "scripts": {
-    "start":"docker compose -f \"docker-compose.yml\" up -d --build && cd containers/app && yarn run dev"
+    "start":"yarn run compose && cd containers/app && yarn run dev",
+    "build":"cd containers/app && yarn run build && cd ../../ && yarn run serve",
+    "compose":"docker compose -f \"docker-compose.yml\" up -d --build",
+    "serve":"docker compose -f \"docker-compose.prod.yml\" up -d --build"
   }
 }

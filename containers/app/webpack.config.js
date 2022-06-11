@@ -1,5 +1,6 @@
 // Plugins
 const CompressionPlugin = require('compression-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 // const WorkboxPlugin = require('workbox-webpack-plugin')
 
 // Helpers
@@ -8,7 +9,7 @@ const nodeExternals = require('webpack-node-externals')
 const path = require('path')
 
 // Rules
-const { CompileReact, CompileSass, IncludeMediaFiles, IncludeTemplateFiles } = require('./.webpack/rules');
+const { CompileReact, CompileSass, IncludeMediaFiles, IncludeTemplateFiles, IgnoreSass } = require('./.webpack/rules');
 
 // ====== CONFIGS
 const devConfig = {
@@ -21,12 +22,21 @@ const prodConfig = {
 }
 
 // Create config from environment & shared config
-function configure(mode, config) {
-    const common = merge(mode == "development" ? devConfig : prodConfig, {
+function configure(mode, config, loadStyles = false) {
+    const common = merge(mode == "development" ? devConfig : prodConfig, loadStyles ? {
         module: {
             rules: [
                 CompileReact(),
-                CompileSass(),
+                CompileSass(MiniCssExtractPlugin.loader),
+                IncludeMediaFiles(),
+                IncludeTemplateFiles(),
+            ]
+        }
+    } : {
+        module: {
+            rules: [
+                CompileReact(),
+                IgnoreSass(),
                 IncludeMediaFiles(),
                 IncludeTemplateFiles(),
             ]
@@ -53,9 +63,10 @@ const clientConfig = (mode) => configure(mode, {
         new CompressionPlugin({
             test: /\.(js|css)?$/i,
             algorithm: 'gzip',
-        })
+        }),
+        new MiniCssExtractPlugin()
     ]
-})
+}, true);
 
 // Compile server
 const serverConfig = (mode) => configure(mode, {
@@ -71,5 +82,20 @@ const serverConfig = (mode) => configure(mode, {
     ]
 })
 
+// Extract client socket.io.js
+const socketConfig = () => { return {
+    entry: '../../node_modules/socket.io/client-dist/socket.io.js',
+    output: {
+        path: path.resolve(__dirname, '../../static'),
+        filename: 'wsclient.js'
+    },
+    plugins: [
+        new CompressionPlugin({
+            test: /\.(js|css)?$/i,
+            algorithm: 'gzip',
+        })
+    ]
+}}
+
 // ===== EXPORT
-module.exports = (env, options) => [clientConfig(options.mode), serverConfig(options.mode)]
+module.exports = (env, options) => [clientConfig(options.mode), serverConfig(options.mode), socketConfig()]

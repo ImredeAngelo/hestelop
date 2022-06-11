@@ -1,63 +1,57 @@
 import React, { Component } from 'react'
-import { Helmet } from 'react-helmet'
-import socket, { listen } from './assets/socket'
+import { Routes, Route } from 'react-router-dom'
+
+import {listen} from './assets/socket'
+
+import FrontPage from './pages/front-page'
+import HostPage from './pages/page-host'
+import PlayerPage from './pages/player-page'
+
+import './reset.css'
 
 export default class App extends Component {
     constructor() {
         super();
         
-        this.testSocket = this.testSocket.bind(this);
-        this.testHost = this.testHost.bind(this);
+        // this.join = this.join.bind(this);
+        // this.host = this.host.bind(this);
     }
 
     componentDidMount() {
-        socket.on('chat message', (msg) => {
-            console.log("msg: ", msg);
-        })
+        // socket.on('chat message', (msg) => {
+        //     console.log("msg: ", msg);
+        // });
+        
+        // socket.on('created', (msg) => {
+        //     console.log(msg);
+        // });
 
         listen();
-        // socket.connect();
-
-        socket.on('chat message', (msg) => {
-            console.log("b: ", msg);
-        });
-        
-        socket.on('created', (msg) => {
-            console.log(msg);
-        });
     }
     
-    testSocket(e) {
-        this.emit('chat message', document.getElementById('roomID').value);
-        e.preventDefault();
-    }
+    // join(e) {
+    //     e.preventDefault();
 
-    testHost(e) {
-        this.emit('host', '');
-        e.preventDefault();
-    }
+    //     game.join(document.getElementById('roomID').value);
+    // }
 
-    emit(a, b) {
-        socket.emit(a, b);
-    }
+    // host(e) {
+    //     e.preventDefault();
+        
+    //     socket.on(GAME_CREATED, (data) => {
+    //         console.log(data.code);
+    //     })
+
+    //     game.host();
+    // }
 
     render() {
         return (
-            <div>
-                <Helmet>
-                    <title>Hesteløp</title>
-                    <script src="wsclient.js"/>
-                </Helmet>
-                <form>
-                    <input id="roomID" type="text"/>
-                    <button onClick={this.testSocket}>
-                        Join
-                    </button>
-                    <button onClick={this.testHost}>
-                        Host
-                    </button>
-                </form>
-            </div>
+            <Routes>
+                <Route index element={<FrontPage/>} />
+                <Route path="/host" element={<HostPage/>} />
+                <Route path="/:room" element={<PlayerPage/>} />
+            </Routes>
         )
     }
 }

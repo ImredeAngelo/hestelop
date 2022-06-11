@@ -1,6 +1,6 @@
 import React from 'react'
 // import StyleContext from 'isomorphic-style-loader/StyleContext'
-// import { BrowserRouter as Router } from 'react-router-dom'
+import { BrowserRouter as Router } from 'react-router-dom'
 // import { hydrateRoot } from 'react-dom/client';
 import { createRoot } from 'react-dom/client';
 // import { Workbox } from 'workbox-window'
@@ -28,4 +28,8 @@ import App from './app'
 const container = document.getElementById('root');
 const root = createRoot(container);
 
-root.render(<App/>);
+root.render(
+    <Router>
+        <App/>
+    </Router>
+);

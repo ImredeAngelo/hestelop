@@ -1,7 +1,7 @@
 // import { ChunkExtractor, ChunkExtractorManager } from '@loadable/server'
 import React from 'react'
 import ReactDOMServer from 'react-dom/server'
-// import { StaticRouter } from 'react-router'
+import { StaticRouter } from 'react-router-dom/server'
 // import StyleContext from 'isomorphic-style-loader/StyleContext'
 import { Helmet } from 'react-helmet'
 
@@ -55,11 +55,11 @@ export default function render(request, response) {
     // Render main app
     const markup = ReactDOMServer.renderToString(
         // <ChunkExtractorManager manager={extractor}>
-            // <StaticRouter location={ request.url }>
-                // <StyleContext.Provider value={{ insertCss }}>
+            <StaticRouter location={ request.url }>
+                {/* <StyleContext.Provider value={{ insertCss }}> */}
                     <App/>
-                // </StyleContext.Provider>
-            // </StaticRouter>
+                {/* </StyleContext.Provider> */}
+            </StaticRouter>
         // </ChunkExtractorManager>
     )
     
