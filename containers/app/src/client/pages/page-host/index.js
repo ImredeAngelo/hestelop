@@ -25,17 +25,17 @@ export default class HostPage extends Component {
 
   onGameCreated(response) {
     console.log('Game created: ', response);
-    // this.setState({
-    //   ...this.state,
-    //   room: response.code
-    // });
+    this.setState({
+      ...this.state,
+      room: response.code
+    });
   }
 
   render() {
     return this.state.room != null ? (
       <form>
         Rom {this.state.room}
-        <Lobby/>
+        <Lobby pin={this.state.room}/>
         <button>Start spill</button>  
       </form>
     ) : (

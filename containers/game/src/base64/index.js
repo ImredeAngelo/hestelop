@@ -1,4 +1,4 @@
-const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'; // Base 26
 
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;

@@ -65,9 +65,6 @@ module.exports.CompileSass = (extractor) => { return {
         {
             loader: extractor
         },
-        // {
-        //     loader: 'isomorphic-style-loader'
-        // },
         {
             loader: 'css-loader',
             options: {

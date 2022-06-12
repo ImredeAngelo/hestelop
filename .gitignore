@@ -3,4 +3,4 @@ dist
 node_modules
 bundle.js*
 main.css*
-wsclient.js.*
+wsclient.js*

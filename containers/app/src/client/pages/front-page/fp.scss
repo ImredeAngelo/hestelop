@@ -1,0 +1,39 @@
+.wrapper {
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    
+    transform: translate(-50%, -50%);
+    position: absolute;
+    margin: 0 auto;
+    top: 50%;
+    left: 50%;
+}
+
+@mixin base {
+    box-sizing: border-box;
+    height: 42px;
+    width: 100%;
+
+    border-radius: 5px;
+}
+
+.input {
+    @include base;
+    margin-bottom: 5px;
+    text-align: center;
+    
+    &.active {
+        text-transform: uppercase;
+    }
+}
+
+
+.btn {
+    @include base;
+    border: 1px solid black;
+}
+
+.link {
+    color: black;
+}
