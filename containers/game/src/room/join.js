@@ -26,7 +26,7 @@ export default function join(socket, response) {
                 room:room 
             });
             
-            console.log(`User '${name}' joined room ${room}`);
+            // console.log(`User '${name}' joined room ${room}`);
             return true;
         }
 

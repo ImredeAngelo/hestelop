@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import * as status from '@socket/codes'
 import socket from '@socket'
+import Spinner from '@components/spinner'
 
 export default class Lobby extends Component {
   constructor() {
@@ -23,7 +24,7 @@ export default class Lobby extends Component {
   // Also remove player
   addPlayer(r) {
     console.log("Player joined", r);
-    this.setPlayers({
+    this.setPlayers({ 
       players: [
         ...this.state.players,
         r.player
@@ -40,13 +41,10 @@ export default class Lobby extends Component {
 
   render() {
     return this.state.players == null ? (
-      <div>Loading</div>
+      <Spinner/>
     ) : (
       <div>
-        players
-        { this.state.players.map((player, i) => 
-          <div key={i}>{player}</div>
-        )}
+        { this.state.players.map((player, i) => <div key={i}>{player.name}</div>)}
       </div>
     )
   }

@@ -50,7 +50,7 @@ export default class App extends Component {
             <Routes>
                 <Route index element={<FrontPage/>} />
                 <Route path="/host" element={<HostPage/>} />
-                <Route path="/:room" element={<PlayerPage/>} />
+                <Route path="/:room" element={<PlayerPage room/>} />
             </Routes>
         )
     }

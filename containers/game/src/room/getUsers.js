@@ -3,7 +3,6 @@ import * as rooms from "./rooms.js"
 
 export default function getUsers(socket, data) {
     const room = rooms.get(data.pin);
-    console.log(data, room);
 
     if(room == undefined) {
         socket.emit(FAILED, { error:0 });

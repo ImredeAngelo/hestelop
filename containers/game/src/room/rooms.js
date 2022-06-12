@@ -29,7 +29,7 @@ export function addPlayer(pin, socket, name) {
 
         // TODO: Use generated rooms (not socket connection) to communicate
         r.players.push({
-            con:socket,
+            // con:socket,
             name:name
         });
 

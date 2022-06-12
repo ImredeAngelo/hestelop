@@ -1,13 +1,25 @@
 import React, { Component } from 'react'
+import Spinner from '@components/spinner';
+import Lobby from '@components/lobby'
+import style from './pp.scss'
 
 export default class PlayerPage extends Component {
   constructor() {
     super();
+
+    this.client = (typeof window !== 'undefined');
+  }
+
+  componentDidMount() {
+    console.log(window.location.pathname.substring(1))
   }
 
   render() {
     return (
-      <div>Player</div>
+      <div>
+        Player Page
+        {this.client ? <Lobby pin={window.location.pathname.substring(1)}/> : <Spinner/>}
+      </div>
     )
     // return this.state.username == null ? (
     //   <form className={style.wrapper} onSubmit={this.joinGame}

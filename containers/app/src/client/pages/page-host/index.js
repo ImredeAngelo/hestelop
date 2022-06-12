@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import socket from '@socket'
 import * as status from '@socket/codes'
-import Lobby from '@components/lobby';
-import Loading from '../../assets/components/loading';
+import Spinner from '@components/spinner'
+import Lobby from '@components/lobby'
+import style from './hp.scss'
 
 export default class HostPage extends Component {
   constructor() {
@@ -39,7 +40,7 @@ export default class HostPage extends Component {
         <button>Start spill</button>  
       </form>
     ) : (
-      <Loading/>
+      <Spinner/>
     )
   }
 }
