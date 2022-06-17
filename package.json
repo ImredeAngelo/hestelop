@@ -7,13 +7,15 @@
   "license": "MIT",
   "private": true,
   "workspaces": [
-    "containers/app", 
+    "containers/app",
     "containers/game"
   ],
   "scripts": {
-    "start":"yarn run compose && cd containers/app && yarn run dev",
-    "build":"cd containers/app && yarn run build && cd ../../ && yarn run serve",
-    "compose":"docker compose -f \"docker-compose.yml\" up -d --build",
-    "serve":"docker compose -f \"docker-compose.prod.yml\" up -d --build"
+    "start": "yarn run dev && yarn run compose",
+    "dev": "cd containers/app && yarn run dev",
+    "build": "cd containers/app && yarn run build && cd ../../ && yarn run serve",
+    "compose": "docker compose -f \"docker-compose.yml\" up -d --build",
+    "serve": "docker compose -f \"docker-compose.prod.yml\" up -d --build",
+    "setup": "cd containers/app && yarn install && cd ../game && yarn install"
   }
 }
